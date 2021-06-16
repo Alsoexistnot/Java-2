@@ -3,7 +3,6 @@ package Lesson_1.Marathon.Runners;
 import Lesson_1.Marathon.Race.Obstacle;
 
 public class Team {
-//    private String name;
     public final Being[] runners = new Being[4];
 
     public Team(String humanName, String catName, String dogName, String monkeyName) {
