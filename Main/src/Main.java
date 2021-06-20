@@ -18,7 +18,7 @@ public class Main {
     }
 
     public static void converter(String[][] array) throws MyArraySizeException, MyArrayDataException {
-        if (array[0].length == 4 & array.length == 4) {
+        if (array[0].length == 4 && array.length == 4) {
             for (int i = 0; i < array.length; i++) {
                 for (int j = 0; j < array.length; j++) {
                     try {
