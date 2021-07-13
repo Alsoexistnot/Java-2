@@ -91,7 +91,7 @@ public class AuthService {
 
     public static boolean isNicknameExistsInBlacklist(int id, String nick) {
         try {
-            ResultSet rs = stmt.executeQuery("SELECT blacklist_nick FROM blacklist WHERE id = '" + id + "'");
+            ResultSet rs = stmt.executeQuery("SELECT blacklist_nick FROM blacklist WHERE users_id = '" + id + "'");
            while (rs.next()){
                 String temp = rs.getString("blacklist_nick");
                 if (nick.equals(temp)){
