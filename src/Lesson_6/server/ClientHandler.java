@@ -55,7 +55,7 @@ public class ClientHandler {
 //                                    break;
                                 } else if (str.startsWith("/w ")) {
                                     String[] tokens = str.split(" ", 3);
-                                    serv.sendPersonalMsg(ClientHandler.this, tokens[1], tokens[2]);
+                                    serv.sendPersonalMsg(ClientHandler.this, tokens[1], tokens[2], nick);
                                 }
                                 else if (str.startsWith("/blacklist ")) {
                                     String[] tokens = str.split(" ");
@@ -73,7 +73,7 @@ public class ClientHandler {
 
                                 }
                             } else {
-                                serv.broadcastMsg(ClientHandler.this, nick + ": " + str, AuthService.getIdByNickname(nick));
+                                serv.broadcastMsg(ClientHandler.this, nick + ": " + str, nick);
                             }
                             System.out.println("Client: " + str);
                         }
