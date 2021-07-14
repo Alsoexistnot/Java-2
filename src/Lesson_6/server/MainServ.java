@@ -54,9 +54,9 @@ public class MainServ {
         broadcastClientsList();
     }
 
-    public void broadcastMsg(ClientHandler from, String msg, int id) {
+    public void broadcastMsg(ClientHandler from, String msg, String nick) {
         for (ClientHandler o : clients) {
-            if (!AuthService.isNicknameExistsInBlacklist(id, o.getNick())) {
+            if (!AuthService.isNicknameExistsInBlacklist(AuthService.getIdByNickname(o.getNick()), nick)) {
                 o.sendMsg(msg);
             }
         }
@@ -71,15 +71,17 @@ public class MainServ {
         return false;
     }
 
-    public void sendPersonalMsg(ClientHandler from, String nickTo, String msg) {
+    public void sendPersonalMsg(ClientHandler from, String nickTo, String msg, String nick) {
         for (ClientHandler o : clients) {
             if (o.getNick().equals(nickTo)) {
-                o.sendMsg("from " + from.getNick() + ": " + msg);
-                from.sendMsg("to " + nickTo + ": " + msg);
-                return;
+                if (!AuthService.isNicknameExistsInBlacklist(AuthService.getIdByNickname(o.getNick()), nick)) {
+                    o.sendMsg("from " + from.getNick() + ": " + msg);
+                    from.sendMsg("to " + nickTo + ": " + msg);
+                    return;
+                }
             }
         }
-        from.sendMsg("Клиент с ником " + nickTo + " не найден в чате");
+        from.sendMsg("Клиент с ником " + nickTo + " не найден в чате, либо Вы у него в черном списке");
     }
 
     public void broadcastClientsList() {
